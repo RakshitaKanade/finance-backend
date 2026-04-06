@@ -26,30 +26,23 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Read the Authorization header
         String authHeader = request.getHeader("Authorization");
 
-        // If no token, just continue (security config will block if needed)
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Extract token (remove "Bearer " prefix)
         String token = authHeader.substring(7);
 
-        // Validate token
         if (!jwtUtil.isTokenValid(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Extract email and role from token
         String email = jwtUtil.extractEmail(token);
         String role = jwtUtil.extractRole(token);
 
-        // Set authentication in Spring Security context
-        // ROLE_ prefix is required by Spring Security
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(
                         email,
