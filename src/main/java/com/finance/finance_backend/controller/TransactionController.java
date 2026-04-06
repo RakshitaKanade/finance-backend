@@ -51,7 +51,6 @@ public class TransactionController {
             @Valid @RequestBody TransactionRequest request,
             Authentication authentication) {
 
-        // Get logged in user's email from JWT
         String email = authentication.getName();
         return ResponseEntity
                 .status(HttpStatus.CREATED)
