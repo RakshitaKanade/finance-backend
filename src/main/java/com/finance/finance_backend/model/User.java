@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data                  // Lombok: generates getters, setters, toString
-@Builder               // Lombok: lets us do User.builder().name("x").build()
-@NoArgsConstructor     // Lombok: generates empty constructor
-@AllArgsConstructor    // Lombok: generates constructor with all fields
-@Entity                // JPA: this class = a database table
-@Table(name = "users") // JPA: table will be named "users"
+@Data                 
+@Builder               
+@NoArgsConstructor     
+@AllArgsConstructor   
+@Entity               
+@Table(name = "users") 
 public class User {
 
     @Id
@@ -31,19 +31,19 @@ public class User {
     private String email;
 
     @NotBlank
-    private String password; // will be stored as bcrypt hash, never plain text
+    private String password; 
 
-    @Enumerated(EnumType.STRING) // store role as "ADMIN" string, not 0/1/2
+    @Enumerated(EnumType.STRING) 
     @Column(nullable = false)
     private Role role;
 
     @Column(nullable = false)
-    private boolean active = true; // active or inactive user
+    private boolean active = true;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @PrePersist // runs automatically before saving to DB
+    @PrePersist 
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
