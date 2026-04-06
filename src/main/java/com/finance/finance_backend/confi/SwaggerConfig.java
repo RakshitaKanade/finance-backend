@@ -18,7 +18,6 @@ public class SwaggerConfig {
                         .title("Finance Backend API")
                         .description("Finance Data Processing and Access Control Backend")
                         .version("1.0.0"))
-                // This adds the Authorize button in Swagger UI
                 .addSecurityItem(new SecurityRequirement()
                         .addList("Bearer Authentication"))
                 .components(new Components()
