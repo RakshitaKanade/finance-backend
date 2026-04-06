@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    // Spring auto-generates the SQL for these just from the method name!
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
