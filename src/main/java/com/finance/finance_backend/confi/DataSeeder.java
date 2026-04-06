@@ -25,10 +25,8 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        // Only seed if DB is empty
         if (userRepository.count() > 0) return;
 
-        // Create admin user
         User admin = userRepository.save(User.builder()
                 .name("Admin User")
                 .email("admin@finance.com")
@@ -37,7 +35,6 @@ public class DataSeeder implements CommandLineRunner {
                 .active(true)
                 .build());
 
-        // Create analyst user
         User analyst = userRepository.save(User.builder()
                 .name("Analyst User")
                 .email("analyst@finance.com")
@@ -46,7 +43,6 @@ public class DataSeeder implements CommandLineRunner {
                 .active(true)
                 .build());
 
-        // Create viewer user
         userRepository.save(User.builder()
                 .name("Viewer User")
                 .email("viewer@finance.com")
@@ -55,7 +51,6 @@ public class DataSeeder implements CommandLineRunner {
                 .active(true)
                 .build());
 
-        // Seed some sample transactions
         transactionRepository.save(Transaction.builder()
                 .amount(new BigDecimal("50000.00"))
                 .type(TransactionType.INCOME)
