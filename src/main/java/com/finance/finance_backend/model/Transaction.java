@@ -26,27 +26,27 @@ public class Transaction {
     private Long id;
 
     @NotNull
-    @Positive // amount must be > 0
+    @Positive 
     @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal amount; // BigDecimal for money, never use double/float
+    private BigDecimal amount; 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TransactionType type; // INCOME or EXPENSE
+    private TransactionType type;
 
     @NotBlank
     @Column(nullable = false)
-    private String category; // e.g. "Salary", "Food", "Rent"
+    private String category;
 
     @NotNull
     @Column(nullable = false)
     private LocalDate date;
 
-    private String notes; // optional description
+    private String notes; 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false)
-    private User createdBy; // which user created this transaction
+    private User createdBy; 
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
